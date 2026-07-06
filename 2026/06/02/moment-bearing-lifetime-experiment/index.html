@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基于MOMENT时序大模型的轴承全寿命数据实验过程总结 | QLL 技术博客</title>
+  <meta name="description" content="本实验依托 XJTU 轴承全寿命 HI 健康指标数据集，以 MOMENT 掩码自监督时序模型为基础，梳理数据预处理、无标签预训练与多任务微调的完整实验流程。">
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="post">
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="主导航">
+      <a class="brand" href="/" aria-label="QLL 技术博客">
+        <span class="brand-mark">QLL</span>
+        <span>
+          <strong>QLL 技术博客</strong>
+          <small>Time-Series Lab</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="/#featured">专题</a>
+        <a href="/#grid">路径</a>
+        <a href="/archives/">归档</a>
+      </div>
+      <a class="nav-button" href="/2026/06/02/moment-bearing-lifetime-experiment/">阅读实验总结</a>
+    </nav>
+  </header>
+
+  <main>
+    
+
+<article class="article-page">
+  <header class="article-hero">
+    <div class="article-hero-inner">
+      <div>
+        <div class="meta-row article-meta">
+          <span>2026-06-02</span>
+          <span>实验总结</span>
+          <span>5 个标签</span>
+        </div>
+        <h1>基于MOMENT时序大模型的轴承全寿命数据实验过程总结</h1>
+        <p>本实验依托 XJTU 轴承全寿命 HI 健康指标数据集，以 MOMENT 掩码自监督时序模型为基础，梳理数据预处理、无标签预训练与多任务微调的完整实验流程。</p>
+      </div>
+      <img src="/images/bearing-wave.svg" alt="基于MOMENT时序大模型的轴承全寿命数据实验过程总结">
+    </div>
+  </header>
+
+  <div class="article-shell">
+    <aside class="toc-panel">
+      <strong>文章导航</strong>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%85%A8%E5%AF%BF%E5%91%BD%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">一、第一阶段：全寿命轴承数据集预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E5%AF%BF%E5%91%BD%E5%BA%8F%E5%88%97%E5%88%92%E5%88%86"><span class="toc-text">1. 全寿命序列划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A0%B7%E6%9C%AC%E5%88%87%E5%88%86"><span class="toc-text">2. 滑动窗口样本切分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E5%B1%82%E5%88%92%E5%88%86"><span class="toc-text">3. 数据集分层划分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9AMOMENT-%E6%A8%A1%E5%9E%8B%E6%97%A0%E6%A0%87%E7%AD%BE%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-text">二、第二阶段：MOMENT 模型无标签自监督预训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9A%8F%E6%9C%BA%E5%9D%87%E5%8C%80%E6%8E%A9%E7%A0%81%EF%BC%88Masking%EF%BC%89"><span class="toc-text">1. 随机均匀掩码（Masking）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BA%8F%E5%88%97%E5%88%86%E5%9D%97%EF%BC%88Patching%EF%BC%89"><span class="toc-text">2. 序列分块（Patching）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81%EF%BC%88Encoding%EF%BC%89"><span class="toc-text">3. 嵌入编码（Encoding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8E%A9%E7%A0%81%E9%87%8D%E5%BB%BA%EF%BC%88Reconstruction%EF%BC%89"><span class="toc-text">4. 掩码重建（Reconstruction）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%A4%9A%E4%B8%8B%E6%B8%B8%E4%BB%BB%E5%8A%A1%E5%88%86%E7%AD%96%E7%95%A5%E5%BE%AE%E8%B0%83"><span class="toc-text">三、第三阶段：预训练模型多下游任务分策略微调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BD%B4%E6%89%BF%E9%80%80%E5%8C%96%E8%B6%8B%E5%8A%BF%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">1. 轴承退化趋势预测任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BD%B4%E6%89%BF%E6%95%85%E9%9A%9C%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1"><span class="toc-text">2. 轴承故障分类任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BD%B4%E6%89%BF%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">3. 轴承异常检测任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91%E6%80%BB%E7%BB%93"><span class="toc-text">实验整体逻辑总结</span></a></li></ol>
+    </aside>
+    <div class="article-body">
+      <p>本实验依托 <strong>XJTU 轴承全寿命 HI 健康指标数据集</strong>，以 MOMENT 掩码自监督时序模型为基础，整体分为 <strong>数据预处理 → 模型自监督预训练 → 多任务下游微调</strong> 三大核心阶段，分别实现轴承趋势预测、故障分类、异常检测三类工业运维任务。全程预训练阶段无任何故障标签，标签仅在微调阶段使用，具体实验流程如下。</p>
+<h2 id="一、第一阶段：全寿命轴承数据集预处理"><a href="#一、第一阶段：全寿命轴承数据集预处理" class="headerlink" title="一、第一阶段：全寿命轴承数据集预处理"></a>一、第一阶段：全寿命轴承数据集预处理</h2><h3 id="1-全寿命序列划分"><a href="#1-全寿命序列划分" class="headerlink" title="1. 全寿命序列划分"></a>1. 全寿命序列划分</h3><p>原始 XJTU 轴承 HI 健康指标时序按照设备生命周期分为三段：<strong>健康平稳期</strong>（指标小幅波动无抬升）、<strong>线性劣化期</strong>（指标匀速上涨）、<strong>失效突增期</strong>（指标指数飙升至失效阈值）。数据集整体为强趋势、非平稳、无固定周期的长时序数据。</p>
+<h3 id="2-滑动窗口样本切分"><a href="#2-滑动窗口样本切分" class="headerlink" title="2. 滑动窗口样本切分"></a>2. 滑动窗口样本切分</h3><p>采用固定窗口长度 <code>L=512</code>、滑动步长 <code>S=256</code>（50% 重叠）的滑动截取策略，将超长全寿命时序切分为大量长度统一的局部子序列样本。该方法既保留单样本内局部波动特征，又留存设备全寿命退化趋势信息，统一适配 MOMENT 模型输入尺寸。</p>
+<h3 id="3-数据集分层划分"><a href="#3-数据集分层划分" class="headerlink" title="3. 数据集分层划分"></a>3. 数据集分层划分</h3><p>将全部窗口样本打乱顺序后按 <strong>7:1.5:1.5</strong> 垂直切分：训练集 70%、验证集 15%、测试集 15%。<strong>预训练仅使用打乱后的训练集样本，验证集、测试集全程不参与预训练过程</strong>，规避时序水平切分带来的数据泄露、时序分布割裂问题，保障下游评测公正性。</p>
+<h2 id="二、第二阶段：MOMENT-模型无标签自监督预训练"><a href="#二、第二阶段：MOMENT-模型无标签自监督预训练" class="headerlink" title="二、第二阶段：MOMENT 模型无标签自监督预训练"></a>二、第二阶段：MOMENT 模型无标签自监督预训练</h2><p>基于切分后的轴承训练集样本，采用 MOMENT 原生掩码自监督框架完成预训练。预训练全程 <strong>不使用故障标签、剩余寿命标签</strong>，仅依靠时序本身信息学习通用退化特征。</p>
+<h3 id="1-随机均匀掩码（Masking）"><a href="#1-随机均匀掩码（Masking）" class="headerlink" title="1. 随机均匀掩码（Masking）"></a>1. 随机均匀掩码（Masking）</h3><p>输入单变量轴承 HI 时序，通过随机掩码矩阵对序列部分位置做遮蔽，使用专属 <code>[MASK]</code> 嵌入向量替换被掩码数据，避免零填充带来的数据分布偏移。</p>
+<h3 id="2-序列分块（Patching）"><a href="#2-序列分块（Patching）" class="headerlink" title="2. 序列分块（Patching）"></a>2. 序列分块（Patching）</h3><p>将完整时序切分为若干长度 <code>P</code>、互不重叠的局部 Patch 片段，区分可见 Patch 与掩码 Patch，统一数据块规格。</p>
+<h3 id="3-嵌入编码（Encoding）"><a href="#3-嵌入编码（Encoding）" class="headerlink" title="3. 嵌入编码（Encoding）"></a>3. 嵌入编码（Encoding）</h3><p>每个 Patch 经过线性投影映射为 <code>D</code> 维嵌入向量，送入多层 Transformer Encoder 堆叠结构，依靠多头自注意力、Pre-LN、MLP 残差结构挖掘时序全局退化规律与局部细节波动。</p>
+<h3 id="4-掩码重建（Reconstruction）"><a href="#4-掩码重建（Reconstruction）" class="headerlink" title="4. 掩码重建（Reconstruction）"></a>4. 掩码重建（Reconstruction）</h3><p>轻量化重建头将编码特征还原回原始时序空间，<strong>仅针对预训练中被掩码的片段计算重建损失</strong>。模型以最小化掩码区域重建误差为优化目标，自主学习轴承健康指标内在时序规律，最终得到具备通用时序表征与序列重建能力的预训练主干 Backbone。</p>
+<h2 id="三、第三阶段：预训练模型多下游任务分策略微调"><a href="#三、第三阶段：预训练模型多下游任务分策略微调" class="headerlink" title="三、第三阶段：预训练模型多下游任务分策略微调"></a>三、第三阶段：预训练模型多下游任务分策略微调</h2><p>冻结或解冻预训练主干不同参数，分别搭建任务专属输出头，依托验证集、测试集搭配对应任务标签完成微调与效果验证。三项任务微调方案相互独立。</p>
+<h3 id="1-轴承退化趋势预测任务"><a href="#1-轴承退化趋势预测任务" class="headerlink" title="1. 轴承退化趋势预测任务"></a>1. 轴承退化趋势预测任务</h3><ul>
+<li><strong>微调策略</strong>：冻结全部预训练主干 Backbone 参数，仅新增轻量化可训练线性预测头（Prediction Head）。</li>
+<li><strong>数据与标签</strong>：微调阶段输入轴承窗口样本，搭配样本对应的退化寿命标签。</li>
+<li><strong>任务目标</strong>：利用预训练习得的退化时序特征，由新增预测头输出轴承健康指标未来变化趋势，实现剩余寿命 &#x2F; 退化趋势预测。</li>
+</ul>
+<h3 id="2-轴承故障分类任务"><a href="#2-轴承故障分类任务" class="headerlink" title="2. 轴承故障分类任务"></a>2. 轴承故障分类任务</h3><ul>
+<li><strong>微调策略</strong>：冻结主干底层 Encoder，仅解冻顶层部分 Encoder 参数，新增可训练分类头（Classification Head）。</li>
+<li><strong>数据与标签</strong>：预训练全程无故障标签，<strong>仅在微调阶段输入样本并附加对应故障类别标签</strong>。</li>
+<li><strong>任务目标</strong>：微调顶层编码器适配故障模式特征，由分类头输出轴承故障类别结果。</li>
+</ul>
+<h3 id="3-轴承异常检测任务"><a href="#3-轴承异常检测任务" class="headerlink" title="3. 轴承异常检测任务"></a>3. 轴承异常检测任务</h3><ul>
+<li><strong>微调策略</strong>：全程冻结完整预训练重建模块参数，不更新主干权重，基于零样本思路搭配阈值校准完成异常判别。</li>
+<li><strong>实现逻辑</strong>：输入待测轴承时序样本至冻结的预训练重建模块，计算原始时序与模型重建序列的误差，依托健康样本数据校准误差阈值。</li>
+<li><strong>任务目标</strong>：以重建误差是否超出阈值为判定依据，自动区分设备正常 &#x2F; 异常状态，实现无异常样本参与训练的零样本异常检测。</li>
+</ul>
+<h2 id="实验整体逻辑总结"><a href="#实验整体逻辑总结" class="headerlink" title="实验整体逻辑总结"></a>实验整体逻辑总结</h2><p>实验通过 <strong>预处理规范全寿命轴承数据 → 无标签自监督预训练提取通用退化表征 → 差异化微调适配三类工业下游任务</strong> 的完整链路，验证 MOMENT 时序大模型在轴承剩余寿命预测、故障分类、异常检测场景的迁移适配能力。预训练与微调阶段数据、标签严格隔离，杜绝标签泄露，保证实验评测严谨性。</p>
+<blockquote>
+<p>注：文档部分内容可能由 AI 生成。</p>
+</blockquote>
+
+    </div>
+  </div>
+</article>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2026 QLL 技术博客</span>
+      <span>Built with Hexo · Hosted on GitHub Pages</span>
+    </div>
+  </footer>
+</body>
+</html>
