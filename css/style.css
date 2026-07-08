@@ -1063,6 +1063,134 @@ img {
   font-family: var(--mono);
 }
 
+.article-body figure.highlight {
+  position: relative;
+  margin: 24px 0;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.16);
+  border-radius: 12px;
+  background: #0f172a;
+  box-shadow: 0 14px 36px rgba(15, 23, 42, 0.18);
+}
+
+.article-body figure.highlight::before {
+  content: "code";
+  display: block;
+  padding: 10px 86px 9px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.96), rgba(15, 23, 42, 0.96));
+  color: #93c5fd;
+  font: 700 12px/1 var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.article-body figure.highlight .copy-code-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 2;
+  height: 26px;
+  min-width: 58px;
+  border: 1px solid rgba(147, 197, 253, 0.32);
+  border-radius: 7px;
+  background: rgba(15, 23, 42, 0.72);
+  color: #bfdbfe;
+  font: 700 12px/1 var(--sans);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.article-body figure.highlight .copy-code-btn:hover,
+.article-body figure.highlight .copy-code-btn.copied {
+  border-color: rgba(103, 232, 249, 0.62);
+  background: rgba(8, 145, 178, 0.9);
+  color: #fff;
+}
+
+.article-body figure.highlight.bash::before {
+  content: "bash";
+}
+
+.article-body figure.highlight.yaml::before {
+  content: "yaml";
+}
+
+.article-body figure.highlight.markdown::before {
+  content: "markdown";
+}
+
+.article-body figure.highlight.plaintext::before {
+  content: "text";
+}
+
+.article-body figure.highlight table {
+  width: 100%;
+  margin: 0;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.article-body figure.highlight pre {
+  margin: 0;
+  padding: 16px 0;
+  overflow-x: auto;
+  color: #e2e8f0;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.75;
+  white-space: pre;
+}
+
+.article-body figure.highlight .gutter {
+  width: 48px;
+  user-select: none;
+  border-right: 1px solid rgba(148, 163, 184, 0.18);
+  background: rgba(15, 23, 42, 0.72);
+  color: #64748b;
+  text-align: right;
+  vertical-align: top;
+}
+
+.article-body figure.highlight .gutter pre {
+  padding-right: 12px;
+  padding-left: 12px;
+}
+
+.article-body figure.highlight .code {
+  width: 100%;
+  vertical-align: top;
+}
+
+.article-body figure.highlight .code pre {
+  padding-right: 18px;
+  padding-left: 18px;
+}
+
+.article-body figure.highlight .line {
+  min-height: 1.75em;
+}
+
+.article-body figure.highlight .comment {
+  color: #94a3b8;
+}
+
+.article-body figure.highlight .string {
+  color: #86efac;
+}
+
+.article-body figure.highlight .attr,
+.article-body figure.highlight .built_in,
+.article-body figure.highlight .meta {
+  color: #67e8f9;
+}
+
+.article-body figure.highlight .number,
+.article-body figure.highlight .bullet,
+.article-body figure.highlight .section {
+  color: #fbbf24;
+}
+
 .article-body blockquote {
   margin: 30px 0 0;
   border-left: 4px solid var(--orange);

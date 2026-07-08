@@ -414,5 +414,75 @@ window.addEventListener('DOMContentLoaded', function() {
       <span>Built with Hexo · Hosted on GitHub Pages</span>
     </div>
   </footer>
+  <script>
+    (function () {
+      function getCodeText(block) {
+        const codePre = block.querySelector('td.code pre') || block.querySelector('pre');
+        if (!codePre) return '';
+        const lines = codePre.querySelectorAll('.line');
+        if (lines.length) {
+          return Array.from(lines).map(function (line) {
+            return line.textContent;
+          }).join('\n');
+        }
+        return codePre.textContent;
+      }
+
+      function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          return Promise.resolve();
+        } catch (error) {
+          return Promise.reject(error);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return fallbackCopy(text);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.article-body figure.highlight').forEach(function (block) {
+          if (block.querySelector('.copy-code-btn')) return;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'copy-code-btn';
+          button.textContent = '复制';
+          button.setAttribute('aria-label', '复制代码');
+
+          button.addEventListener('click', function () {
+            copyText(getCodeText(block)).then(function () {
+              button.textContent = '已复制';
+              button.classList.add('copied');
+              window.setTimeout(function () {
+                button.textContent = '复制';
+                button.classList.remove('copied');
+              }, 1600);
+            }).catch(function () {
+              button.textContent = '复制失败';
+              window.setTimeout(function () {
+                button.textContent = '复制';
+              }, 1600);
+            });
+          });
+
+          block.appendChild(button);
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
