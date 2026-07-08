@@ -47,13 +47,14 @@
     </div>
   </header>
 
-  <div class="article-shell">
-    <aside class="toc-panel">
-      <strong>文章导航</strong>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%85%A8%E5%AF%BF%E5%91%BD%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">一、第一阶段：全寿命轴承数据集预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E5%AF%BF%E5%91%BD%E5%BA%8F%E5%88%97%E5%88%92%E5%88%86"><span class="toc-text">1. 全寿命序列划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A0%B7%E6%9C%AC%E5%88%87%E5%88%86"><span class="toc-text">2. 滑动窗口样本切分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E5%B1%82%E5%88%92%E5%88%86"><span class="toc-text">3. 数据集分层划分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9AMOMENT-%E6%A8%A1%E5%9E%8B%E6%97%A0%E6%A0%87%E7%AD%BE%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-text">二、第二阶段：MOMENT 模型无标签自监督预训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9A%8F%E6%9C%BA%E5%9D%87%E5%8C%80%E6%8E%A9%E7%A0%81%EF%BC%88Masking%EF%BC%89"><span class="toc-text">1. 随机均匀掩码（Masking）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BA%8F%E5%88%97%E5%88%86%E5%9D%97%EF%BC%88Patching%EF%BC%89"><span class="toc-text">2. 序列分块（Patching）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81%EF%BC%88Encoding%EF%BC%89"><span class="toc-text">3. 嵌入编码（Encoding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8E%A9%E7%A0%81%E9%87%8D%E5%BB%BA%EF%BC%88Reconstruction%EF%BC%89"><span class="toc-text">4. 掩码重建（Reconstruction）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%A4%9A%E4%B8%8B%E6%B8%B8%E4%BB%BB%E5%8A%A1%E5%88%86%E7%AD%96%E7%95%A5%E5%BE%AE%E8%B0%83"><span class="toc-text">三、第三阶段：预训练模型多下游任务分策略微调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BD%B4%E6%89%BF%E9%80%80%E5%8C%96%E8%B6%8B%E5%8A%BF%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">1. 轴承退化趋势预测任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BD%B4%E6%89%BF%E6%95%85%E9%9A%9C%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1"><span class="toc-text">2. 轴承故障分类任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BD%B4%E6%89%BF%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">3. 轴承异常检测任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91%E6%80%BB%E7%BB%93"><span class="toc-text">实验整体逻辑总结</span></a></li></ol>
-    </aside>
-    <div class="article-body">
-      <p>本实验依托 <strong>XJTU 轴承全寿命 HI 健康指标数据集</strong>，以 MOMENT 掩码自监督时序模型为基础，整体分为 <strong>数据预处理 → 模型自监督预训练 → 多任务下游微调</strong> 三大核心阶段，分别实现轴承趋势预测、故障分类、异常检测三类工业运维任务。全程预训练阶段无任何故障标签，标签仅在微调阶段使用，具体实验流程如下。</p>
+  <div class="article-shell-wrapper">
+    <div class="article-shell">
+      <aside class="toc-panel">
+        <strong>文章导航</strong>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%AC%AC%E4%B8%80%E9%98%B6%E6%AE%B5%EF%BC%9A%E5%85%A8%E5%AF%BF%E5%91%BD%E8%BD%B4%E6%89%BF%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">一、第一阶段：全寿命轴承数据集预处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%A8%E5%AF%BF%E5%91%BD%E5%BA%8F%E5%88%97%E5%88%92%E5%88%86"><span class="toc-text">1. 全寿命序列划分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3%E6%A0%B7%E6%9C%AC%E5%88%87%E5%88%86"><span class="toc-text">2. 滑动窗口样本切分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%88%86%E5%B1%82%E5%88%92%E5%88%86"><span class="toc-text">3. 数据集分层划分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E7%AC%AC%E4%BA%8C%E9%98%B6%E6%AE%B5%EF%BC%9AMOMENT-%E6%A8%A1%E5%9E%8B%E6%97%A0%E6%A0%87%E7%AD%BE%E8%87%AA%E7%9B%91%E7%9D%A3%E9%A2%84%E8%AE%AD%E7%BB%83"><span class="toc-text">二、第二阶段：MOMENT 模型无标签自监督预训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%9A%8F%E6%9C%BA%E5%9D%87%E5%8C%80%E6%8E%A9%E7%A0%81%EF%BC%88Masking%EF%BC%89"><span class="toc-text">1. 随机均匀掩码（Masking）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BA%8F%E5%88%97%E5%88%86%E5%9D%97%EF%BC%88Patching%EF%BC%89"><span class="toc-text">2. 序列分块（Patching）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%B5%8C%E5%85%A5%E7%BC%96%E7%A0%81%EF%BC%88Encoding%EF%BC%89"><span class="toc-text">3. 嵌入编码（Encoding）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%8E%A9%E7%A0%81%E9%87%8D%E5%BB%BA%EF%BC%88Reconstruction%EF%BC%89"><span class="toc-text">4. 掩码重建（Reconstruction）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%AC%AC%E4%B8%89%E9%98%B6%E6%AE%B5%EF%BC%9A%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E5%A4%9A%E4%B8%8B%E6%B8%B8%E4%BB%BB%E5%8A%A1%E5%88%86%E7%AD%96%E7%95%A5%E5%BE%AE%E8%B0%83"><span class="toc-text">三、第三阶段：预训练模型多下游任务分策略微调</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%BD%B4%E6%89%BF%E9%80%80%E5%8C%96%E8%B6%8B%E5%8A%BF%E9%A2%84%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">1. 轴承退化趋势预测任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BD%B4%E6%89%BF%E6%95%85%E9%9A%9C%E5%88%86%E7%B1%BB%E4%BB%BB%E5%8A%A1"><span class="toc-text">2. 轴承故障分类任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BD%B4%E6%89%BF%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B%E4%BB%BB%E5%8A%A1"><span class="toc-text">3. 轴承异常检测任务</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B4%E4%BD%93%E9%80%BB%E8%BE%91%E6%80%BB%E7%BB%93"><span class="toc-text">实验整体逻辑总结</span></a></li></ol>
+      </aside>
+      <div class="article-body">
+        <p>本实验依托 <strong>XJTU 轴承全寿命 HI 健康指标数据集</strong>，以 MOMENT 掩码自监督时序模型为基础，整体分为 <strong>数据预处理 → 模型自监督预训练 → 多任务下游微调</strong> 三大核心阶段，分别实现轴承趋势预测、故障分类、异常检测三类工业运维任务。全程预训练阶段无任何故障标签，标签仅在微调阶段使用，具体实验流程如下。</p>
 <h2 id="一、第一阶段：全寿命轴承数据集预处理"><a href="#一、第一阶段：全寿命轴承数据集预处理" class="headerlink" title="一、第一阶段：全寿命轴承数据集预处理"></a>一、第一阶段：全寿命轴承数据集预处理</h2><h3 id="1-全寿命序列划分"><a href="#1-全寿命序列划分" class="headerlink" title="1. 全寿命序列划分"></a>1. 全寿命序列划分</h3><p>原始 XJTU 轴承 HI 健康指标时序按照设备生命周期分为三段：<strong>健康平稳期</strong>（指标小幅波动无抬升）、<strong>线性劣化期</strong>（指标匀速上涨）、<strong>失效突增期</strong>（指标指数飙升至失效阈值）。数据集整体为强趋势、非平稳、无固定周期的长时序数据。</p>
 <h3 id="2-滑动窗口样本切分"><a href="#2-滑动窗口样本切分" class="headerlink" title="2. 滑动窗口样本切分"></a>2. 滑动窗口样本切分</h3><p>采用固定窗口长度 <code>L=512</code>、滑动步长 <code>S=256</code>（50% 重叠）的滑动截取策略，将超长全寿命时序切分为大量长度统一的局部子序列样本。该方法既保留单样本内局部波动特征，又留存设备全寿命退化趋势信息，统一适配 MOMENT 模型输入尺寸。</p>
 <h3 id="3-数据集分层划分"><a href="#3-数据集分层划分" class="headerlink" title="3. 数据集分层划分"></a>3. 数据集分层划分</h3><p>将全部窗口样本打乱顺序后按 <strong>7:1.5:1.5</strong> 垂直切分：训练集 70%、验证集 15%、测试集 15%。<strong>预训练仅使用打乱后的训练集样本，验证集、测试集全程不参与预训练过程</strong>，规避时序水平切分带来的数据泄露、时序分布割裂问题，保障下游评测公正性。</p>
@@ -83,9 +84,152 @@
 <p>注：文档部分内容可能由 AI 生成。</p>
 </blockquote>
 
+      </div>
     </div>
+
+    <!-- 右侧互动区域 -->
+    <aside class="article-sidebar">
+      <!-- 支持博主 -->
+      <div class="support-card">
+        <div class="support-header">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <h3>支持博主</h3>
+        </div>
+        <p>如果这篇文章对你有帮助，欢迎请博主喝杯咖啡~</p>
+        <div class="qrcode-placeholder">
+          <img src="/images/reward-qr.jpg" alt="支持博主" onerror="this.parentElement.innerHTML='<p style=\'color:#94a3b8;font-size:14px;\'>暂未设置收款码</p>'">
+        </div>
+      </div>
+
+      <!-- 文章互动 -->
+      <div class="article-actions">
+        <button class="action-btn like-btn" onclick="handleLike()" title="点赞">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+          </svg>
+          <span class="action-text">点赞</span>
+          <span class="action-count" id="like-count">0</span>
+        </button>
+
+        <button class="action-btn favorite-btn" onclick="handleFavorite()" title="收藏">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+          </svg>
+          <span class="action-text">收藏</span>
+          <span class="action-count" id="favorite-count">0</span>
+        </button>
+
+        <button class="action-btn share-btn" onclick="handleShare()" title="分享">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+          </svg>
+          <span class="action-text">分享</span>
+        </button>
+      </div>
+
+      <!-- GitHub 评论 -->
+      <div class="comments-card">
+        <h3>评论区</h3>
+        <div id="gitalk-container"></div>
+      </div>
+    </aside>
   </div>
 </article>
+
+<!-- Gitalk CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+<!-- Gitalk JS -->
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+<script>
+// 初始化 Gitalk
+const gitalk = new Gitalk({
+  clientID: 'Ov23li8RSnKfAGXOSKwD',
+  clientSecret: '28377bd7c7bcd6861d04287677cc08b30bc9f744',
+  repo: 'lichcode0114.github.io',
+  owner: 'lichcode0114',
+  admin: ['lichcode0114'],
+  id: location.pathname,
+  distractionFreeMode: false,
+  language: 'zh-CN'
+})
+
+gitalk.render('gitalk-container')
+
+// 互动功能
+function handleLike() {
+  const btn = document.querySelector('.like-btn');
+  const count = document.getElementById('like-count');
+  const currentCount = parseInt(count.textContent) || 0;
+
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    count.textContent = currentCount - 1;
+    localStorage.removeItem('liked-' + location.pathname);
+  } else {
+    btn.classList.add('active');
+    count.textContent = currentCount + 1;
+    localStorage.setItem('liked-' + location.pathname, 'true');
+  }
+}
+
+function handleFavorite() {
+  const btn = document.querySelector('.favorite-btn');
+  const count = document.getElementById('favorite-count');
+  const currentCount = parseInt(count.textContent) || 0;
+
+  if (btn.classList.contains('active')) {
+    btn.classList.remove('active');
+    count.textContent = currentCount - 1;
+    localStorage.removeItem('favorited-' + location.pathname);
+  } else {
+    btn.classList.add('active');
+    count.textContent = currentCount + 1;
+    localStorage.setItem('favorited-' + location.pathname, 'true');
+  }
+}
+
+function handleShare() {
+  if (navigator.share) {
+    navigator.share({
+      title: document.title,
+      url: location.href
+    }).catch(err => console.log('分享失败', err));
+  } else {
+    // 复制链接到剪贴板
+    const url = location.href;
+    navigator.clipboard.writeText(url).then(() => {
+      alert('链接已复制到剪贴板！');
+    }).catch(() => {
+      // 降级方案
+      const input = document.createElement('input');
+      input.value = url;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
+      alert('链接已复制到剪贴板！');
+    });
+  }
+}
+
+// 加载用户之前的互动状态
+window.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('liked-' + location.pathname)) {
+    document.querySelector('.like-btn').classList.add('active');
+  }
+  if (localStorage.getItem('favorited-' + location.pathname)) {
+    document.querySelector('.favorite-btn').classList.add('active');
+  }
+});
+</script>
 
   </main>
 

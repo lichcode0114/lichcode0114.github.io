@@ -558,12 +558,204 @@ img {
   box-shadow: 0 20px 60px rgba(30, 58, 95, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.5);
 }
 
+.article-shell-wrapper {
+  width: min(1400px, calc(100% - 40px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  padding: 58px 0 88px;
+  align-items: start;
+}
+
 .article-shell {
   display: grid;
   grid-template-columns: 250px minmax(0, 820px);
   gap: 48px;
   align-items: start;
-  padding: 58px 0 88px;
+}
+
+/* 右侧边栏 */
+.article-sidebar {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-self: start;
+}
+
+/* 支持博主卡片 */
+.support-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+}
+
+.support-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.support-header svg {
+  color: #f43f5e;
+  animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1); }
+}
+
+.support-header h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #1e3a5f;
+}
+
+.support-card p {
+  margin: 0 0 16px;
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.qrcode-placeholder {
+  text-align: center;
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 8px;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qrcode-placeholder img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 文章互动按钮 */
+.article-actions {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: linear-gradient(135deg, rgba(240, 249, 255, 0.9), rgba(224, 242, 254, 0.9));
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  border-radius: 8px;
+  color: #0891b2;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(8, 145, 178, 0.2);
+  border-color: rgba(8, 145, 178, 0.4);
+}
+
+.action-btn.active {
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
+  color: white;
+  border-color: #0891b2;
+}
+
+.action-btn svg {
+  flex-shrink: 0;
+}
+
+.action-text {
+  flex: 1;
+}
+
+.action-count {
+  font-size: 12px;
+  padding: 2px 8px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #0891b2;
+  border-radius: 12px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.action-btn.active .action-count {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* 评论卡片 */
+.comments-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(8, 145, 178, 0.2);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(30, 58, 95, 0.12);
+}
+
+.comments-card h3 {
+  margin: 0 0 20px;
+  font-size: 18px;
+  color: #1e3a5f;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(8, 145, 178, 0.2);
+}
+
+#gitalk-container {
+  margin-top: 16px;
+}
+
+/* Gitalk 样式覆盖 */
+.gt-container .gt-header-textarea {
+  border-radius: 8px;
+  border-color: rgba(8, 145, 178, 0.3);
+}
+
+.gt-container .gt-btn-public {
+  background: linear-gradient(135deg, #0891b2, #06b6d4);
+  border: none;
+  border-radius: 8px;
+}
+
+/* 响应式 */
+@media (max-width: 1200px) {
+  .article-shell-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .article-sidebar {
+    position: static;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .article-shell {
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 32px;
+  }
 }
 
 .toc-panel {
