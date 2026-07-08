@@ -89,54 +89,84 @@
 
     <!-- 右侧互动区域 -->
     <aside class="article-sidebar">
-      <!-- 支持博主 -->
-      <div class="support-card">
-        <div class="support-header">
+      <!-- 浮动按钮组 -->
+      <div class="floating-buttons">
+        <button class="float-btn support-float" onclick="togglePanel('support')" title="支持博主">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
           </svg>
-          <h3>支持博主</h3>
-        </div>
-        <p>如果这篇文章对你有帮助，欢迎请博主喝杯咖啡~</p>
-        <div class="qrcode-placeholder">
-          <img src="/images/reward-qr.jpg" alt="支持博主" onerror="this.parentElement.innerHTML='<p style=\'color:#94a3b8;font-size:14px;\'>暂未设置收款码</p>'">
-        </div>
-      </div>
+        </button>
 
-      <!-- 文章互动 -->
-      <div class="article-actions">
-        <button class="action-btn like-btn" onclick="handleLike()" title="点赞">
+        <button class="float-btn actions-float" onclick="togglePanel('actions')" title="互动">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
           </svg>
-          <span class="action-text">点赞</span>
-          <span class="action-count" id="like-count">0</span>
         </button>
 
-        <button class="action-btn favorite-btn" onclick="handleFavorite()" title="收藏">
+        <button class="float-btn comments-float" onclick="togglePanel('comments')" title="评论">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
-          <span class="action-text">收藏</span>
-          <span class="action-count" id="favorite-count">0</span>
-        </button>
-
-        <button class="action-btn share-btn" onclick="handleShare()" title="分享">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="18" cy="5" r="3"></circle>
-            <circle cx="6" cy="12" r="3"></circle>
-            <circle cx="18" cy="19" r="3"></circle>
-            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-          </svg>
-          <span class="action-text">分享</span>
         </button>
       </div>
 
-      <!-- GitHub 评论 -->
-      <div class="comments-card">
-        <h3>评论区</h3>
-        <div id="gitalk-container"></div>
+      <!-- 支持博主面板 -->
+      <div class="sidebar-panel support-panel" id="support-panel">
+        <button class="close-panel" onclick="closePanel('support')">×</button>
+        <div class="support-card">
+          <div class="support-header">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <h3>支持博主</h3>
+          </div>
+          <p>如果这篇文章对你有帮助，欢迎请博主喝杯咖啡~</p>
+          <div class="qrcode-placeholder">
+            <img src="/images/reward-qr.jpg" alt="支持博主" onerror="this.parentElement.innerHTML='<p style=\'color:#94a3b8;font-size:14px;\'>暂未设置收款码</p>'">
+          </div>
+        </div>
+      </div>
+
+      <!-- 互动面板 -->
+      <div class="sidebar-panel actions-panel" id="actions-panel">
+        <button class="close-panel" onclick="closePanel('actions')">×</button>
+        <div class="article-actions">
+          <button class="action-btn like-btn" onclick="handleLike()" title="点赞">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+            </svg>
+            <span class="action-text">点赞</span>
+            <span class="action-count" id="like-count">0</span>
+          </button>
+
+          <button class="action-btn favorite-btn" onclick="handleFavorite()" title="收藏">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+            </svg>
+            <span class="action-text">收藏</span>
+            <span class="action-count" id="favorite-count">0</span>
+          </button>
+
+          <button class="action-btn share-btn" onclick="handleShare()" title="分享">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+            <span class="action-text">分享</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 评论面板 -->
+      <div class="sidebar-panel comments-panel" id="comments-panel">
+        <button class="close-panel" onclick="closePanel('comments')">×</button>
+        <div class="comments-card">
+          <h3>评论区</h3>
+          <div id="gitalk-container"></div>
+        </div>
       </div>
     </aside>
   </div>
@@ -164,70 +194,274 @@ const gitalk = new Gitalk({
 gitalk.render('gitalk-container')
 
 // 互动功能
+// 面板控制
+function togglePanel(panelType) {
+  const panel = document.getElementById(`${panelType}-panel`);
+
+  // 切换当前面板（不关闭其他面板）
+  panel.classList.toggle('active');
+
+  // 如果是评论面板且正在打开，滚动到顶部
+  if (panelType === 'comments' && panel.classList.contains('active')) {
+    setTimeout(() => {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+}
+
+function closePanel(panelType) {
+  const panel = document.getElementById(`${panelType}-panel`);
+  panel.classList.remove('active');
+}
+
+// 页面加载时默认展开所有面板
+window.addEventListener('DOMContentLoaded', function() {
+  // 默认展开所有面板
+  document.getElementById('support-panel').classList.add('active');
+  document.getElementById('actions-panel').classList.add('active');
+  document.getElementById('comments-panel').classList.add('active');
+
+  // 恢复互动状态和计数（需要在面板展开后）
+  setTimeout(() => {
+    const likeBtn = document.querySelector('.like-btn');
+    const favoriteBtn = document.querySelector('.favorite-btn');
+    const likeCountEl = document.getElementById('like-count');
+    const favoriteCountEl = document.getElementById('favorite-count');
+
+    // 恢复点赞状态和计数
+    if (isActive('like')) {
+      likeBtn.classList.add('active');
+    }
+    likeCountEl.textContent = getCount('like');
+
+    // 恢复收藏状态和计数
+    if (isActive('favorite')) {
+      favoriteBtn.classList.add('active');
+    }
+    favoriteCountEl.textContent = getCount('favorite');
+  }, 100);
+
+  // 限制侧边栏显示在文章内容区域
+  constrainSidebarVisibility();
+  window.addEventListener('scroll', constrainSidebarVisibility);
+  window.addEventListener('resize', constrainSidebarVisibility);
+});
+
+// 限制侧边栏可见性
+function constrainSidebarVisibility() {
+  const articleBody = document.querySelector('.article-body');
+  const sidebar = document.querySelector('.article-sidebar');
+  const floatingButtons = document.querySelector('.floating-buttons');
+
+  if (!articleBody || !sidebar) return;
+
+  const articleRect = articleBody.getBoundingClientRect();
+  const sidebarRect = sidebar.getBoundingClientRect();
+
+  // 检查侧边栏是否在文章内容范围内
+  const sidebarTop = sidebarRect.top;
+  const sidebarBottom = sidebarRect.bottom;
+  const articleTop = articleRect.top;
+  const articleBottom = articleRect.bottom;
+
+  // 如果侧边栏顶部在文章顶部之上，或者侧边栏底部在文章底部之下，隐藏超出部分
+  if (sidebarTop < articleTop || sidebarBottom > articleBottom) {
+    // 计算可见区域
+    const visibleTop = Math.max(sidebarTop, articleTop);
+    const visibleBottom = Math.min(sidebarBottom, articleBottom);
+
+    if (visibleBottom <= visibleTop) {
+      // 完全不可见
+      sidebar.style.opacity = '0';
+      sidebar.style.pointerEvents = 'none';
+      if (floatingButtons) {
+        floatingButtons.style.opacity = '0';
+        floatingButtons.style.pointerEvents = 'none';
+      }
+    } else {
+      // 部分可见或完全可见
+      sidebar.style.opacity = '1';
+      sidebar.style.pointerEvents = 'auto';
+      if (floatingButtons) {
+        floatingButtons.style.opacity = '1';
+        floatingButtons.style.pointerEvents = 'auto';
+      }
+    }
+  } else {
+    // 完全在范围内
+    sidebar.style.opacity = '1';
+    sidebar.style.pointerEvents = 'auto';
+    if (floatingButtons) {
+      floatingButtons.style.opacity = '1';
+      floatingButtons.style.pointerEvents = 'auto';
+    }
+  }
+}
+
+// 获取文章唯一标识
+const articleId = location.pathname;
+
+// 获取或初始化计数
+function getCount(type) {
+  const key = `${type}-count-${articleId}`;
+  const count = localStorage.getItem(key);
+  return count ? parseInt(count) : 0;
+}
+
+// 保存计数
+function saveCount(type, count) {
+  const key = `${type}-count-${articleId}`;
+  localStorage.setItem(key, count.toString());
+}
+
+// 检查状态
+function isActive(type) {
+  const key = `${type}-${articleId}`;
+  return localStorage.getItem(key) === 'true';
+}
+
+// 保存状态
+function saveState(type, active) {
+  const key = `${type}-${articleId}`;
+  if (active) {
+    localStorage.setItem(key, 'true');
+  } else {
+    localStorage.removeItem(key);
+  }
+}
+
 function handleLike() {
   const btn = document.querySelector('.like-btn');
-  const count = document.getElementById('like-count');
-  const currentCount = parseInt(count.textContent) || 0;
+  const countEl = document.getElementById('like-count');
+  let currentCount = getCount('like');
+  const wasActive = isActive('like');
 
-  if (btn.classList.contains('active')) {
+  if (wasActive) {
+    // 取消点赞
     btn.classList.remove('active');
-    count.textContent = currentCount - 1;
-    localStorage.removeItem('liked-' + location.pathname);
+    currentCount = Math.max(0, currentCount - 1);
+    saveState('like', false);
   } else {
+    // 点赞
     btn.classList.add('active');
-    count.textContent = currentCount + 1;
-    localStorage.setItem('liked-' + location.pathname, 'true');
+    currentCount = currentCount + 1;
+    saveState('like', true);
   }
+
+  saveCount('like', currentCount);
+  countEl.textContent = currentCount;
 }
 
 function handleFavorite() {
   const btn = document.querySelector('.favorite-btn');
-  const count = document.getElementById('favorite-count');
-  const currentCount = parseInt(count.textContent) || 0;
+  const countEl = document.getElementById('favorite-count');
+  let currentCount = getCount('favorite');
+  const wasActive = isActive('favorite');
 
-  if (btn.classList.contains('active')) {
+  if (wasActive) {
+    // 取消收藏
     btn.classList.remove('active');
-    count.textContent = currentCount - 1;
-    localStorage.removeItem('favorited-' + location.pathname);
+    currentCount = Math.max(0, currentCount - 1);
+    saveState('favorite', false);
   } else {
+    // 收藏
     btn.classList.add('active');
-    count.textContent = currentCount + 1;
-    localStorage.setItem('favorited-' + location.pathname, 'true');
+    currentCount = currentCount + 1;
+    saveState('favorite', true);
   }
+
+  saveCount('favorite', currentCount);
+  countEl.textContent = currentCount;
 }
 
 function handleShare() {
+  const url = location.href;
+  const title = document.title;
+
+  // 优先使用原生分享 API（移动端）
   if (navigator.share) {
     navigator.share({
-      title: document.title,
-      url: location.href
-    }).catch(err => console.log('分享失败', err));
-  } else {
-    // 复制链接到剪贴板
-    const url = location.href;
-    navigator.clipboard.writeText(url).then(() => {
-      alert('链接已复制到剪贴板！');
-    }).catch(() => {
-      // 降级方案
-      const input = document.createElement('input');
-      input.value = url;
-      document.body.appendChild(input);
-      input.select();
-      document.execCommand('copy');
-      document.body.removeChild(input);
-      alert('链接已复制到剪贴板！');
+      title: title,
+      url: url
+    }).then(() => {
+      // 分享成功，不显示任何提示
+      console.log('分享成功');
+    }).catch((error) => {
+      // 用户取消分享，不显示错误
+      if (error.name !== 'AbortError') {
+        // 只有非取消的错误才提示
+        console.log('分享失败', error);
+      }
     });
+  } else {
+    // 降级方案：复制链接到剪贴板
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(() => {
+        showShareToast('链接已复制到剪贴板！');
+      }).catch(() => {
+        fallbackCopyText(url);
+      });
+    } else {
+      fallbackCopyText(url);
+    }
   }
+}
+
+// 降级复制方法
+function fallbackCopyText(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+    showShareToast('链接已复制到剪贴板！');
+  } catch (err) {
+    showShareToast('复制失败，请手动复制链接');
+  }
+
+  document.body.removeChild(textarea);
+}
+
+// 显示分享提示
+function showShareToast(message) {
+  // 创建提示元素
+  const toast = document.createElement('div');
+  toast.className = 'share-toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+
+  // 触发动画
+  setTimeout(() => toast.classList.add('show'), 10);
+
+  // 2秒后移除
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => document.body.removeChild(toast), 300);
+  }, 2000);
 }
 
 // 加载用户之前的互动状态
 window.addEventListener('DOMContentLoaded', function() {
-  if (localStorage.getItem('liked-' + location.pathname)) {
-    document.querySelector('.like-btn').classList.add('active');
+  const likeBtn = document.querySelector('.like-btn');
+  const favoriteBtn = document.querySelector('.favorite-btn');
+  const likeCountEl = document.getElementById('like-count');
+  const favoriteCountEl = document.getElementById('favorite-count');
+
+  // 恢复点赞状态和计数
+  if (isActive('like')) {
+    likeBtn.classList.add('active');
   }
-  if (localStorage.getItem('favorited-' + location.pathname)) {
-    document.querySelector('.favorite-btn').classList.add('active');
+  likeCountEl.textContent = getCount('like');
+
+  // 恢复收藏状态和计数
+  if (isActive('favorite')) {
+    favoriteBtn.classList.add('active');
   }
+  favoriteCountEl.textContent = getCount('favorite');
 });
 </script>
 
