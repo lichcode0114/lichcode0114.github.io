@@ -135,16 +135,14 @@
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
             </svg>
-            <span class="action-text">点赞</span>
-            <span class="action-count" id="like-count">0</span>
+            <span class="action-count" id="like-count" aria-label="点赞数">0</span>
           </button>
 
           <button class="action-btn favorite-btn" onclick="handleFavorite()" title="收藏">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
             </svg>
-            <span class="action-text">收藏</span>
-            <span class="action-count" id="favorite-count">0</span>
+            <span class="action-count" id="favorite-count" aria-label="收藏数">0</span>
           </button>
 
           <button class="action-btn share-btn" onclick="handleShare()" title="分享">
@@ -155,7 +153,6 @@
               <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
               <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
             </svg>
-            <span class="action-text">分享</span>
           </button>
         </div>
       </div>
@@ -240,63 +237,7 @@ window.addEventListener('DOMContentLoaded', function() {
     }
     favoriteCountEl.textContent = getCount('favorite');
   }, 100);
-
-  // 限制侧边栏显示在文章内容区域
-  constrainSidebarVisibility();
-  window.addEventListener('scroll', constrainSidebarVisibility);
-  window.addEventListener('resize', constrainSidebarVisibility);
 });
-
-// 限制侧边栏可见性
-function constrainSidebarVisibility() {
-  const articleBody = document.querySelector('.article-body');
-  const sidebar = document.querySelector('.article-sidebar');
-  const floatingButtons = document.querySelector('.floating-buttons');
-
-  if (!articleBody || !sidebar) return;
-
-  const articleRect = articleBody.getBoundingClientRect();
-  const sidebarRect = sidebar.getBoundingClientRect();
-
-  // 检查侧边栏是否在文章内容范围内
-  const sidebarTop = sidebarRect.top;
-  const sidebarBottom = sidebarRect.bottom;
-  const articleTop = articleRect.top;
-  const articleBottom = articleRect.bottom;
-
-  // 如果侧边栏顶部在文章顶部之上，或者侧边栏底部在文章底部之下，隐藏超出部分
-  if (sidebarTop < articleTop || sidebarBottom > articleBottom) {
-    // 计算可见区域
-    const visibleTop = Math.max(sidebarTop, articleTop);
-    const visibleBottom = Math.min(sidebarBottom, articleBottom);
-
-    if (visibleBottom <= visibleTop) {
-      // 完全不可见
-      sidebar.style.opacity = '0';
-      sidebar.style.pointerEvents = 'none';
-      if (floatingButtons) {
-        floatingButtons.style.opacity = '0';
-        floatingButtons.style.pointerEvents = 'none';
-      }
-    } else {
-      // 部分可见或完全可见
-      sidebar.style.opacity = '1';
-      sidebar.style.pointerEvents = 'auto';
-      if (floatingButtons) {
-        floatingButtons.style.opacity = '1';
-        floatingButtons.style.pointerEvents = 'auto';
-      }
-    }
-  } else {
-    // 完全在范围内
-    sidebar.style.opacity = '1';
-    sidebar.style.pointerEvents = 'auto';
-    if (floatingButtons) {
-      floatingButtons.style.opacity = '1';
-      floatingButtons.style.pointerEvents = 'auto';
-    }
-  }
-}
 
 // 获取文章唯一标识
 const articleId = location.pathname;
