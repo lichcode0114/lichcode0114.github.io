@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LiCode 技术分享</title>
+  <meta name="description" content="记录时序大模型、工业运维、轴承全寿命数据实验与工程实践。">
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="page">
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="主导航">
+      <a class="brand" href="/" aria-label="LiCode 技术分享">
+        <span class="brand-mark">LC</span>
+        <span>
+          <strong>LiCode 技术分享</strong>
+          <small>各种相关技术的分享UP</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/archives/">归档</a>
+        <a href="/categories/">分类</a>
+        <a href="/tags/">标签</a>
+        <a href="/about/">关于</a>
+      </div>
+      <a class="nav-button" href="/about/">个人简介</a>
+    </nav>
+  </header>
+
+  <main>
+    
+
+<section class="archive-hero">
+  <div class="section-inner">
+    <span class="section-kicker">Archive</span>
+    <h1>文章归档</h1>
+    <p>按时间沉淀实验记录、复现过程和工程笔记。</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="archive-list">
+      
+      <article class="archive-item">
+        <time>2026-07-07</time>
+        <div>
+          <h2><a href="/2026/07/07/how-to-build-hexo-github-blog/">如何建立 Hexo + GitHub 的个人博客</a></h2>
+          <p>前言Hexo 是一个快速、简洁且高效的博客框架，使用 Markdown 解析文章，只需几秒就能生成静态网页。结合 GitHub Pages，我们可以免费搭建一个属于自己的技术博客。 本文将详细介绍如何</p>
+        </div>
+      </article>
+      
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2026 LiCode 技术分享</span>
+      <span>Built with Hexo · Hosted on GitHub Pages</span>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      function getCodeText(block) {
+        const codePre = block.querySelector('td.code pre') || block.querySelector('pre');
+        if (!codePre) return '';
+        const lines = codePre.querySelectorAll('.line');
+        if (lines.length) {
+          return Array.from(lines).map(function (line) {
+            return line.textContent;
+          }).join('\n');
+        }
+        return codePre.textContent;
+      }
+
+      function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          return Promise.resolve();
+        } catch (error) {
+          return Promise.reject(error);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return fallbackCopy(text);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.article-body figure.highlight').forEach(function (block) {
+          if (block.querySelector('.copy-code-btn')) return;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'copy-code-btn';
+          button.textContent = '复制';
+          button.setAttribute('aria-label', '复制代码');
+
+          button.addEventListener('click', function () {
+            copyText(getCodeText(block)).then(function () {
+              button.textContent = '已复制';
+              button.classList.add('copied');
+              window.setTimeout(function () {
+                button.textContent = '复制';
+                button.classList.remove('copied');
+              }, 1600);
+            }).catch(function () {
+              button.textContent = '复制失败';
+              window.setTimeout(function () {
+                button.textContent = '复制';
+              }, 1600);
+            });
+          });
+
+          block.appendChild(button);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>LiCode 技术分享</title>
+  <meta name="description" content="记录时序大模型、工业运维、轴承全寿命数据实验与工程实践。">
+  <link rel="stylesheet" href="/css/style.css">
+<meta name="generator" content="Hexo 8.1.2"></head>
+<body class="page">
+  <header class="site-header">
+    <nav class="nav-shell" aria-label="主导航">
+      <a class="brand" href="/" aria-label="LiCode 技术分享">
+        <span class="brand-mark">LC</span>
+        <span>
+          <strong>LiCode 技术分享</strong>
+          <small>各种相关技术的分享UP</small>
+        </span>
+      </a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="/archives/">归档</a>
+        <a href="/categories/">分类</a>
+        <a href="/tags/">标签</a>
+        <a href="/about/">关于</a>
+      </div>
+      <a class="nav-button" href="/about/">个人简介</a>
+    </nav>
+  </header>
+
+  <main>
+    
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> LiCode · 技术分享</p>
+      <h1>LiCode 技术分享：各种相关技术的分享UP</h1>
+      <p class="lead">在这里分享时序大模型、工业运维、深度学习、软件开发等各种技术领域的实践经验和知识总结。</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/2026/07/07/how-to-build-hexo-github-blog/">阅读精选文章</a>
+        <a class="button" href="/about/">了解更多</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-label="LiCode 技术分享">
+      <img src="/images/licode-logo.png" alt="LiCode 技术分享" onerror="this.src='/images/bearing-wave.svg'">
+    </div>
+  </div>
+</section>
+
+<section class="section featured-section" id="featured">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="section-kicker">Featured Article</span>
+      <h2>精选文章</h2>
+      <p>最新的技术分享和实验总结，深入探讨各个技术领域的实践经验。</p>
+    </div>
+
+    <div class="featured-layout">
+      
+      <article class="featured-card">
+        <a class="cover-link" href="/2026/07/07/how-to-build-hexo-github-blog/">
+          <img src="/images/bearing-wave.svg" alt="如何建立 Hexo + GitHub 的个人博客">
+        </a>
+        <div class="featured-content">
+          <div class="meta-row">
+            <span>2026-07-07</span>
+            <span>技术教程</span>
+            <span>Hexo</span>
+          </div>
+          <h3><a href="/2026/07/07/how-to-build-hexo-github-blog/">如何建立 Hexo + GitHub 的个人博客</a></h3>
+          <p>前言Hexo 是一个快速、简洁且高效的博客框架，使用 Markdown 解析文章，只需几秒就能生成静态网页。结合 GitHub Pages，我们可以免费搭建一个属于自己的技术博客。 本文将详细介绍如何从零开始搭建一个 Hexo + Gi</p>
+          <a class="text-link" href="/2026/07/07/how-to-build-hexo-github-blog/">进入文章正文</a>
+        </div>
+      </article>
+      
+
+      <aside class="insight-panel" aria-label="博客统计信息">
+        <div>
+          <span class="panel-label">文章总数</span>
+          <strong>2 篇技术文章</strong>
+        </div>
+        <div>
+          <span class="panel-label">分类数量</span>
+          <strong>2 个分类</strong>
+        </div>
+        <div>
+          <span class="panel-label">标签数量</span>
+          <strong>9 个标签</strong>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section" id="grid">
+  <div class="section-inner">
+    <div class="section-heading">
+      <span class="section-kicker">Navigation Grid</span>
+      <h2>文章导航</h2>
+      <p>快速浏览各个技术主题，点击卡片进入对应文章详情。</p>
+    </div>
+
+    <div class="path-grid">
+      
+      <a class="path-card" href="/2026/07/07/how-to-build-hexo-github-blog/">
+        <span>01</span>
+        <h3>如何建立 Hexo + GitHub 的...</h3>
+        <p>前言Hexo 是一个快速、简洁且高效的博客框架，使用 Markdown 解析文章，只需几秒就能生成静态网页。结合 Git...</p>
+      </a>
+      
+      <a class="path-card" href="/2026/06/02/moment-bearing-lifetime-experiment/">
+        <span>02</span>
+        <h3>基于MOMENT时序大模型的轴承全寿命数...</h3>
+        <p>本实验依托 XJTU 轴承全寿命 HI 健康指标数据集，以 MOMENT 掩码自监督时序模型为基础，梳理数据预处理、无标...</p>
+      </a>
+      
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>© 2026 LiCode 技术分享</span>
+      <span>Built with Hexo · Hosted on GitHub Pages</span>
+    </div>
+  </footer>
+  <script>
+    (function () {
+      function getCodeText(block) {
+        const codePre = block.querySelector('td.code pre') || block.querySelector('pre');
+        if (!codePre) return '';
+        const lines = codePre.querySelectorAll('.line');
+        if (lines.length) {
+          return Array.from(lines).map(function (line) {
+            return line.textContent;
+          }).join('\n');
+        }
+        return codePre.textContent;
+      }
+
+      function fallbackCopy(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          return Promise.resolve();
+        } catch (error) {
+          return Promise.reject(error);
+        } finally {
+          document.body.removeChild(textarea);
+        }
+      }
+
+      function copyText(text) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(text);
+        }
+        return fallbackCopy(text);
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.article-body figure.highlight').forEach(function (block) {
+          if (block.querySelector('.copy-code-btn')) return;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'copy-code-btn';
+          button.textContent = '复制';
+          button.setAttribute('aria-label', '复制代码');
+
+          button.addEventListener('click', function () {
+            copyText(getCodeText(block)).then(function () {
+              button.textContent = '已复制';
+              button.classList.add('copied');
+              window.setTimeout(function () {
+                button.textContent = '复制';
+                button.classList.remove('copied');
+              }, 1600);
+            }).catch(function () {
+              button.textContent = '复制失败';
+              window.setTimeout(function () {
+                button.textContent = '复制';
+              }, 1600);
+            });
+          });
+
+          block.appendChild(button);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
