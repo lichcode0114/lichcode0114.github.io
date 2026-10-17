@@ -1,0 +1,28 @@
+<%
+const allCategories = site.categories.sort('name');
+%>
+
+<div class="archive-hero">
+  <div class="section-inner">
+    <h1>分类</h1>
+    <p>按主题分类浏览所有文章 · 共 <%= allCategories.length %> 个分类</p>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="archive-list">
+      <% allCategories.each(function(category) { %>
+        <article class="archive-item">
+          <div>
+            <time><%= category.posts.length %> 篇</time>
+          </div>
+          <div>
+            <h2><a href="<%- url_for(category.path) %>"><%= category.name %></a></h2>
+            <p>浏览 <%= category.name %> 分类下的所有文章</p>
+          </div>
+        </article>
+      <% }); %>
+    </div>
+  </div>
+</section>

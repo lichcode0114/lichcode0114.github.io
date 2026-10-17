@@ -1,0 +1,19 @@
+<% if (page.type === 'categories') { %>
+  <%- partial('categories') %>
+<% } else if (page.type === 'tags') { %>
+  <%- partial('tags') %>
+<% } else if (page.path === 'about/index.html') { %>
+  <%- partial('about') %>
+<% } else { %>
+<section class="archive-hero">
+  <div class="section-inner">
+    <span class="section-kicker">Page</span>
+    <h1><%= page.title %></h1>
+  </div>
+</section>
+<section class="section">
+  <div class="section-inner article-body page-body">
+    <%- page.content %>
+  </div>
+</section>
+<% } %>

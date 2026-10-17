@@ -1,0 +1,30 @@
+<%
+const posts = page.posts ? page.posts.toArray() : site.posts.sort('-date').toArray();
+function cleanText(value) {
+  return strip_html(value || '').replace(/\s+/g, ' ').trim();
+}
+%>
+
+<section class="archive-hero">
+  <div class="section-inner">
+    <span class="section-kicker">Archive</span>
+    <h1>文章归档</h1>
+    <p>按时间沉淀实验记录、复现过程和工程笔记。</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="archive-list">
+      <% posts.forEach(function(post) { %>
+      <article class="archive-item">
+        <time><%= date(post.date, 'YYYY-MM-DD') %></time>
+        <div>
+          <h2><a href="<%- url_for(post.path) %>"><%= post.title %></a></h2>
+          <p><%= cleanText(post.excerpt || post.content).slice(0, 100) %></p>
+        </div>
+      </article>
+      <% }) %>
+    </div>
+  </div>
+</section>
