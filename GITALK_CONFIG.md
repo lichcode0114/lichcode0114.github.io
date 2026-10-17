@@ -1,5 +1,7 @@
 # Gitalk 评论系统配置指南
 
+> 当前源码未启用 Gitalk。旧 OAuth Client Secret 曾出现在公开网页中，已从模板移除。请先在 GitHub 撤销并轮换旧 Secret。不要依照下面的旧步骤将新的 Secret 写入静态网站源码或构建产物；如需恢复评论，应选择无需前端 Secret 的方案，或在可信服务端完成 OAuth 交换。
+
 ## 第一步：创建 GitHub OAuth App
 
 1. 登录 GitHub，访问：https://github.com/settings/applications/new
